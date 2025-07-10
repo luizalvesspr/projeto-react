@@ -1,4 +1,4 @@
-package com.projretohd.entities;
+package com.projetohd.entities;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -32,8 +32,8 @@ private String fullName;
 
 @Column(length = 60)
 private String email;
-@Column(name = "DataCadastrada")
-private LocalDate dataCadastro;
+@Column(name = "registered_date")
+private LocalDate registereddate;
 
 public User() {}
 
@@ -43,6 +43,7 @@ public User(String username, String password, UserRole role, String fullName, St
     this.role = role;
     this.fullName = fullName;
     this.email = email;
+    this.registereddate = LocalDate.now();
 }
 
 // Getters and setters
@@ -92,6 +93,14 @@ public void setEmail(String email) {
 }
 
 // equals and hashCode (baseado em username)
+
+public LocalDate getRegistereddate() {
+	return registereddate;
+}
+
+public void setRegistereddate(LocalDate registereddate) {
+	this.registereddate = registereddate;
+}
 
 @Override
 public int hashCode() {

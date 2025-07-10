@@ -1,4 +1,4 @@
-package com.projretohd.entities;
+package com.projetohd.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

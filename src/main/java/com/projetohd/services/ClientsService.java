@@ -1,12 +1,11 @@
-package com.projretohd.services;
+package com.projetohd.services;
 
 import java.util.List;
 
-
 import org.springframework.stereotype.Service;
 
-import com.projretohd.entities.Clients;
-import com.projretohd.program.repository.ClientsRepository;
+import com.projetohd.entities.Clients;
+import com.projetohd.program.repository.ClientsRepository;
 @Service
 public class ClientsService {
 	

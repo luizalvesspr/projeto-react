@@ -1,4 +1,4 @@
-package com.projretohd.entities;
+package com.projetohd.entities;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -10,8 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-
-
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -32,17 +30,14 @@ public class IndividualClient extends Clients {
     @Column(name = "age", nullable = false)
     private int age;
 
+ 
 
-    public IndividualClient() {}
-
-    public IndividualClient(String cpf, String name, String phone, String email,
-                            Address address,
-                            LocalDate birthDate) {
-        super(cpf, name, phone, email, address);
+    public IndividualClient(String name, String phone, String email, Address address,
+                            String cpf, LocalDate birthDate) {
+        super(cpf,name, phone, email, address); 
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.age = calculateAge(birthDate);
-        
     }
 
     public String getCpf() {
@@ -62,14 +57,12 @@ public class IndividualClient extends Clients {
         this.age = calculateAge(birthDate);
     }
 
-    private int calculateAge(LocalDate birthDate) {
-        if (birthDate == null) return 0;
-        return Period.between(birthDate, LocalDate.now()).getYears();
-    }
-
     public int getAge() {
         return age;
     }
 
-  
+    private int calculateAge(LocalDate birthDate) {
+        if (birthDate == null) return 0;
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
 }

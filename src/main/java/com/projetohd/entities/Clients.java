@@ -1,4 +1,4 @@
-package com.projretohd.entities;
+package com.projetohd.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -126,4 +126,11 @@ public class Clients implements Serializable {
         Clients other = (Clients) obj;
         return Objects.equals(document, other.document) && Objects.equals(name, other.name);
     }
+
+	@Override
+	public String toString() {
+		return "Clients [id=" + id + ", document=" + document + ", name=" + name + ", phone=" + phone + ", email="
+				+ email + ", registeredDate=" + registeredDate + ", address=" + address + "]";
+	}
+    
 }
