@@ -32,8 +32,11 @@ public class Clients implements Serializable {
     @Column(name = "document")
     private String document;
 
-    @Column(name = "name", nullable = false, length = 300)
-    private String name;
+    @Column(name = "fullname", nullable = false, length = 300)
+    private String fullname;
+    
+    @Column(name = "username", nullable = false, length = 300)
+    private String username;
 
     @Column(name = "phone", length = 255)
     private String phone;
@@ -43,18 +46,22 @@ public class Clients implements Serializable {
     
     @Column(name = "registered_date")
     private LocalDate registeredDate;
-
+    
+    @Column(nullable = false, length = 100)
+	private String password;
     
     @Embedded
     private Address address;
 
     public Clients() {}
 
-    public Clients(String document, String name, String phone, String email, Address address) {
+    public Clients(String document, String fullname, String username, String phone, String email, String password, Address address) {
         this.document = document;
-        this.name = name;
+        this.username = username;
+        this.fullname = fullname;
         this.phone = phone;
         this.email = email;
+        this.password = password;
         this.registeredDate = LocalDate.now();
         this.address = address;
     }
@@ -71,15 +78,25 @@ public class Clients implements Serializable {
         this.document = document;
     }
 
-    public String getName() {
-        return name;
-    }
+   
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getFullname() {
+		return fullname;
+	}
 
-    public String getPhone() {
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPhone() {
         return phone;
     }
 
@@ -96,7 +113,15 @@ public class Clients implements Serializable {
     }
     
 
-    public LocalDate getRegisteredDate() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public LocalDate getRegisteredDate() {
 		return registeredDate;
 	}
 
@@ -114,7 +139,7 @@ public class Clients implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(document, name);
+        return Objects.hash(document, username);
     }
 
     @Override
@@ -124,12 +149,12 @@ public class Clients implements Serializable {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Clients other = (Clients) obj;
-        return Objects.equals(document, other.document) && Objects.equals(name, other.name);
+        return Objects.equals(document, other.document) && Objects.equals(username, other.username);
     }
 
 	@Override
 	public String toString() {
-		return "Clients [id=" + id + ", document=" + document + ", name=" + name + ", phone=" + phone + ", email="
+		return "Clients [id=" + id + ", document=" + document + ", username=" + username + ", phone=" + phone + ", email="
 				+ email + ", registeredDate=" + registeredDate + ", address=" + address + "]";
 	}
     

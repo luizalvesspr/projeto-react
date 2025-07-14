@@ -19,6 +19,9 @@ import com.projetohd.services.UserService;
 
 @Component
 public class MenuConsole {
+	@Autowired
+	private MenuChoice menuChoice;
+
 
     @Autowired
     private ClientsService clientsService;
@@ -36,7 +39,7 @@ public class MenuConsole {
                     System.out.println("1 - Cadastrar Usuário");
                     System.out.println("2 - Cadastrar Cliente");
                     System.out.println("3 - Pesquisar Cliente");
-                    System.out.println("4 - Excluir Usuário");
+                    System.out.println("4 - Login");
                     System.out.println("5 - Alterar Cliente");
                     System.out.println("6 - Achar Credores");
                     System.out.println("7 - Sair");
@@ -45,7 +48,7 @@ public class MenuConsole {
                     scanner.nextLine();
 
                     if (option == 1) {
-                        System.out.print("Username: ");
+                        System.out.print("nome de usúario: ");
                         String username = scanner.nextLine();
                         if (userService.existsByUsername(username)) {
                             System.out.println("Erro: Nome de usuário já existe.");
@@ -65,25 +68,56 @@ public class MenuConsole {
                         System.out.print("Email: ");
                         String email = scanner.nextLine();
 
-                        User user = new User(username, password, role, fullName, email);
+                        System.out.println("Agora, informe o endereço:");
+                        System.out.print("Rua: ");
+                        String street = scanner.nextLine();
+
+                        System.out.print("Número: ");
+                        String number = scanner.nextLine();
+
+                        System.out.print("Bairro: ");
+                        String district = scanner.nextLine();
+
+                        System.out.print("Cidade: ");
+                        String city = scanner.nextLine();
+
+                        System.out.print("Estado: ");
+                        String state = scanner.nextLine();
+
+                        System.out.print("CEP: ");
+                        String zip = scanner.nextLine();
+
+                        System.out.print("País: ");
+                        String country = scanner.nextLine();
+
+                        Address address = new Address(street, number, district, city, state, zip, country);
+
+                        User user = new User(username, password, role, fullName, email, address);
                         userService.saveUser(user);
 
                         System.out.println("Usuário cadastrado com sucesso!");
                     }
+
 
                     else if (option == 2) {
                         System.out.println("Pessoa física ou jurídica? Digite: 1-Física ou 2-Jurídica: ");
                         int personType = scanner.nextInt();
                         scanner.nextLine();
 
-                        System.out.print("Nome: ");
-                        String name = scanner.nextLine();
+                        System.out.print("nome completo: ");
+                        String fullname = scanner.nextLine();
+                        
+                        System.out.print("nome de usuario: ");
+                        String username = scanner.nextLine();
 
                         System.out.print("Telefone: ");
                         String phone = scanner.nextLine();
 
                         System.out.print("Email: ");
                         String email = scanner.nextLine();
+                        
+                        System.out.print("Senha: ");
+                        String password = scanner.nextLine();
 
                         System.out.println("Agora, informe o endereço:");
                         System.out.print("Rua: ");
@@ -121,7 +155,7 @@ public class MenuConsole {
                             String birthDateStr = scanner.nextLine();
                             LocalDate birthDate = LocalDate.parse(birthDateStr, dateFormat);
 
-                            IndividualClient client = new IndividualClient(name, phone, email, address, cpf, birthDate);
+                            IndividualClient client = new IndividualClient(username,fullname, phone, email,password, address, cpf, birthDate);
                             System.out.println("CPF recebido: " + client.getCpf());
                             clientsService.saveClient(client);
                         } else if (personType == 2) {
@@ -135,7 +169,7 @@ public class MenuConsole {
                             System.out.print("Razão social: ");
                             String companyName = scanner.nextLine();
 
-                            CompanyClient client = new CompanyClient(cnpj, name, phone, email, address, companyName);
+                            CompanyClient client = new CompanyClient(cnpj, username,fullname, phone, email,password, address, companyName);
                             clientsService.saveClient(client);
                         }
                     }
@@ -144,7 +178,7 @@ public class MenuConsole {
                         System.out.print("Digite o nome do cliente: ");
                         String name = scanner.nextLine();
 
-                        List<Clients> foundClients = clientsService.findByName(name);
+                        List<Clients> foundClients = clientsService.findByUsername(name);
                         if (foundClients.isEmpty()) {
                             System.out.println("Nenhum cliente encontrado.");
                         } else {
@@ -153,11 +187,28 @@ public class MenuConsole {
                                 System.out.println(c);
                             }
                         }
+                    }else if (option == 4) {
+                    	
+                    	   System.out.println("Digite seu login:");
+
+                         
+                           System.out.print("Email: ");
+                           String email = scanner.nextLine();
+                           System.out.print("Senha: ");
+                           String password = scanner.nextLine();
+                        if( userService.login(email, password) != true) {
+                        	
+                        	
+                        }else {
+                        	menuChoice.showMenu(scanner);
+                        }
+                           
                     }
 
                     else if (option == 7) {
                         System.out.println("Saindo...");
-                        break;
+                        System.exit(0);
+;
                     }
 
                     else {

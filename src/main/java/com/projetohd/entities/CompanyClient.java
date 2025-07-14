@@ -21,8 +21,8 @@ public class CompanyClient extends Clients {
 
     public CompanyClient() {}
 
-    public CompanyClient(String cnpj, String name, String phone, String email, Address address, String corporateName) {
-        super(cnpj, name, phone, email, address);
+    public CompanyClient(String cnpj, String username,String fullname, String phone, String email, String password, Address address, String corporateName) {
+        super(cnpj, username, fullname, phone, email, password, address);
         this.cnpj = cnpj;
         this.corporateName = corporateName;
     }

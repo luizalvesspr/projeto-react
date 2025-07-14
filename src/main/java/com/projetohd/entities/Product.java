@@ -35,6 +35,9 @@ public class Product implements Serializable {
 
     @Column(name = "active")
     private boolean active;
+    @ManyToOne
+    @JoinColumn(name = "user_id") 
+    private User user;
 
     public Product() {
         this.createdDate = LocalDate.now();
@@ -108,6 +111,14 @@ public class Product implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
     @Override
     public String toString() {

@@ -32,9 +32,9 @@ public class IndividualClient extends Clients {
 
  
 
-    public IndividualClient(String name, String phone, String email, Address address,
+    public IndividualClient(String username,String fullname, String phone, String email,String password, Address address,
                             String cpf, LocalDate birthDate) {
-        super(cpf,name, phone, email, address); 
+        super(cpf,username,fullname, phone, email, password, address); 
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.age = calculateAge(birthDate);

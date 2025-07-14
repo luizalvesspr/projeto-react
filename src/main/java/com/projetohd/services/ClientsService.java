@@ -18,8 +18,9 @@ public class ClientsService {
 public void saveClient(Clients cl) {
 	  clientsRepository.save(cl);
   }
-  public List<Clients> findByName(String name) {
+  public List<Clients> findByUsername(String username) {
 	  
-	  return clientsRepository.findByName(name);
+	  return clientsRepository.findByUsername(username);
   }
+  
 }

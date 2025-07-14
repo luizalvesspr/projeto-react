@@ -12,7 +12,7 @@ import com.projetohd.entities.Clients;
 @Repository
 public interface ClientsRepository extends JpaRepository<Clients, Long> {
 
-    List<Clients> findByName(String name);
+    List<Clients> findByUsername(String username);
 
     Optional<Clients> findById(Long id);
 
@@ -20,5 +20,6 @@ public interface ClientsRepository extends JpaRepository<Clients, Long> {
     @Query("SELECT c FROM Clients c ORDER BY c.registeredDate")
     List<Clients> findAllOrderedByRegisteredDate();
 
-   
+    Optional<Clients> findByEmailAndPassword(String email, String password);
+
 }

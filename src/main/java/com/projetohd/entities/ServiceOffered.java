@@ -32,7 +32,9 @@ public class ServiceOffered implements Serializable {
 
     @Column(name = "active")
     private boolean active;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id") 
+    private User user;
     public ServiceOffered() {
         this.createdDate = LocalDate.now();
         this.active = true;
@@ -96,8 +98,17 @@ public class ServiceOffered implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+    
 
-    @Override
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
     public String toString() {
         return "ServiceOffered [id=" + id + ", name=" + name + ", price=" + price + ", duration=" + durationInMinutes + "]";
     }
